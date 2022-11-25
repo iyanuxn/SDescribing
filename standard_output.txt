@@ -1,0 +1,2 @@
+It is Self-describing
+It is not Self-describing
