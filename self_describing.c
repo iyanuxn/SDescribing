@@ -1,10 +1,15 @@
+// SELF DESCRIBING
+// COURSE CODE: CSC 235
+// NAME: OLUWADAMILARE IYANUOLUWA SAMUEL
+// MATRIC NUMBER: 222505
+
 # include <stdio.h>
 # include <string.h>
 # include <stdlib.h>
 # include <math.h>
 
-
-int check_digit(int num, int digit)
+// Checks how many times a digit appears in the given number
+int digit_checker(int num, int digit)
 {
     int count = 0;
     while (num > 0)
@@ -21,11 +26,13 @@ int check_digit(int num, int digit)
 
 int main()
 {
-    
+    // File opening and reading   
     FILE * fpointer = fopen("self.in.txt", "r");
     FILE * buffer = fopen ("standard_output.txt", "w+");
     int num, new, counter;
-    int valid = 0;
+    int verify_self_describing = 0;
+
+    // Getting the number of trials from the file
     fscanf(fpointer, "%d", &num);
 
     while (counter != num)
@@ -33,22 +40,22 @@ int main()
         fscanf(fpointer, "%d", &new);
         char str_num[100];
         
-        /* Converting the integer to a string. */
+        // Converting the integer to a string so as to check string length
         sprintf(str_num ,"%d" , new);
+        // Finding the length of the string 
         int length = strlen(str_num);
         
         for (int i = 0; i < length; i++)
         {
-            /* This is checking if the number of times a digit appears in the number is equal to the
-            digit itself. */
-            if (check_digit(new, i) == str_num[i]- '0')
+            // Self describing check
+            if (digit_checker(new, i) == str_num[i]- '0')
             {
-                valid++;
-                if (valid == length)
+                verify_self_describing++;
+                if (verify_self_describing == length)
                 {
                     fprintf(buffer, "It is Self-describing\n");
                     printf("Self describing\n");
-                    valid = 0;
+                    verify_self_describing = 0;
                     break;
                 }      
             }
